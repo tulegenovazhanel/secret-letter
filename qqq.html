@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Небольшой секрет 🤍</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Georgia, serif;
+    background: linear-gradient(160deg, #17233d, #343451, #735b70);
+    color: #fff8f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+.stars {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.star {
+    position: absolute;
+    color: #fff1cf;
+    animation: twinkle 3s infinite alternate;
+}
+
+@keyframes twinkle {
+    from { opacity: .2; }
+    to { opacity: 1; }
+}
+
+.card {
+    width: 100%;
+    max-width: 430px;
+    padding: 30px 23px;
+    border: 1px solid #ffffff35;
+    border-radius: 24px;
+    background: #ffffff10;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 10px 45px #00000025;
+    position: relative;
+    z-index: 1;
+}
+
+.moon {
+    font-size: 42px;
+    margin-bottom: 12px;
+}
+
+h1 {
+    font-size: 27px;
+    font-weight: normal;
+    line-height: 1.4;
+}
+
+p {
+    font-size: 17px;
+    line-height: 1.8;
+}
+
+button {
+    border: 1px solid #fff1e4;
+    background: #fff1e4;
+    color: #514258;
+    padding: 13px 23px;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: .3s;
+}
+
+button:hover {
+    transform: scale(1.04);
+}
+
+#letter {
+    display: none;
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 18px;
+    background: #fffaf4;
+    color: #514258;
+    animation: appear .8s ease;
+}
+
+#letter p {
+    font-size: 16px;
+}
+
+.signature {
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.heart {
+    position: fixed;
+    bottom: -30px;
+    color: #f8dce8;
+    animation: floatUp 8s linear forwards;
+    pointer-events: none;
+    z-index: 2;
+}
+
+@keyframes floatUp {
+    to {
+        transform: translateY(-110vh) rotate(25deg);
+        opacity: 0;
+    }
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.small {
+    font-size: 13px;
+    opacity: .75;
+    margin-top: 25px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars" id="stars"></div>
+
+<main class="card">
+    <div class="moon">☾ ✦</div>
+
+    <h1>Небольшой секрет 🤍</h1>
+
+    <p>
+        Я приготовила для тебя кое-что маленькое.<br>
+        Нажми на конверт.
+    </p>
+
+    <button id="openButton" onclick="openLetter()">
+        ✉ Открыть письмо
+    </button>
+
+    <div id="letter">
+        <div style="font-size: 32px;">🤍</div>
+
+        <h2 style="font-weight: normal;">
+            Несколько слов для тебя
+        </h2>
+
+        <p>
+            Иногда хочется просто напомнить человеку,
+            что он важен.
+        </p>
+
+        <p>
+            Даже если между нами расстояние,
+            я всё равно желаю тебе побольше
+            спокойных дней, хороших новостей
+            и поводов улыбаться.
+        </p>
+
+        <p>
+            Береги себя, хорошо?<br>
+            Пусть у тебя всё будет хорошо.
+        </p>
+
+        <p>
+            И помни: после долгих дней
+            тоже бывают светлые моменты. ✨
+        </p>
+
+        <div class="signature">
+            От человека, который о тебе помнит ♡
+        </div>
+
+        <button onclick="showHeart()">
+            Маленькое сердечко 🤍
+        </button>
+
+        <p id="extra" style="display:none;">
+            Вот тебе немного тепла на сегодня Люблю тебя. ♡
+        </p>
+    </div>
+
+    <div class="small">
+        Маленький привет издалека ✦
+    </div>
+</main>
+
+<script>
+const stars = document.getElementById("stars");
+
+for (let i = 0; i < 45; i++) {
+    const star = document.createElement("span");
+    star.className = "star";
+    star.textContent = Math.random() > 0.5 ? "✦" : "·";
+    star.style.left = Math.random() * 100 + "%";
+    star.style.top = Math.random() * 100 + "%";
+    star.style.fontSize = (8 + Math.random() * 12) + "px";
+    star.style.animationDelay = Math.random() * 3 + "s";
+    stars.appendChild(star);
+}
+
+function openLetter() {
+    document.getElementById("letter").style.display = "block";
+    document.getElementById("openButton").style.display = "none";
+
+    for (let i = 0; i < 7; i++) {
+        setTimeout(createHeart, i * 180);
+    }
+}
+
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.textContent = Math.random() > 0.5 ? "♡" : "✦";
+    heart.style.left = Math.random() * 90 + "%";
+    heart.style.fontSize = (14 + Math.random() * 15) + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 8000);
+}
+
+function showHeart() {
+    document.getElementById("extra").style.display = "block";
+    createHeart();
+}
+</script>
+
+</body>
+</html>
